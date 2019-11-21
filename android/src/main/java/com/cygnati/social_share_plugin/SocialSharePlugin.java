@@ -203,16 +203,6 @@ public class SocialSharePlugin implements MethodCallHandler, PluginRegistry.Acti
                     result.success(false);
                 }
                 break;
-            case "shareToTwitter":
-                try {
-                    pm.getPackageInfo(TWITTER_PACKAGE_NAME, PackageManager.GET_ACTIVITIES);
-                    twitterShare(call.<String>argument("text"), call.<String>argument("url"));
-                    result.success(true);
-                } catch (PackageManager.NameNotFoundException e) {
-                    openPlayStore(TWITTER_PACKAGE_NAME);
-                    result.success(false);
-                }
-                break;
             default:
                 result.notImplemented();
                 break;

@@ -57,14 +57,17 @@ class _MyAppState extends State<MyApp> {
             RaisedButton(
               child: Text('Share to Instagram'),
               onPressed: () async {
-                File file = await ImagePicker.pickImage(source: ImageSource.gallery);
-                await SocialSharePlugin.shareToFeedInstagram("image/*", file.path);
+                File file =
+                    await ImagePicker.pickImage(source: ImageSource.gallery);
+                await SocialSharePlugin.shareToFeedInstagram(
+                    "image/*", file.path);
               },
             ),
             RaisedButton(
               child: Text('Share to Facebook'),
               onPressed: () async {
-                File file = await ImagePicker.pickImage(source: ImageSource.gallery);
+                File file =
+                    await ImagePicker.pickImage(source: ImageSource.gallery);
                 await SocialSharePlugin.shareToFeedFacebook('test', file.path);
               },
             ),
@@ -91,26 +94,6 @@ class _MyAppState extends State<MyApp> {
                   },
                 );
 
-                print(result);
-              },
-            ),
-            RaisedButton(
-              child: Text('Share to Twitter'),
-              onPressed: () async {
-                String url = 'https://flutter.dev/';
-                final text =
-                    'Flutter is Google’s portable UI toolkit for building beautiful, natively-compiled applications for mobile, web, and desktop from a single codebase.';
-                final result = await SocialSharePlugin.shareToTwitter(
-                    text: text,
-                    url: url,
-                    onSuccess: (_) {
-                      print('TWITTER SUCCESS');
-                      return;
-                    },
-                    onCancel: () {
-                      print('TWITTER CANCELLED');
-                      return;
-                    });
                 print(result);
               },
             ),
