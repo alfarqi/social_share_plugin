@@ -15,12 +15,78 @@ class SocialSharePlugin {
     return version;
   }
 
-  static Future<void> shareToFeedInstagram(String type, String path) async {
+  static Future<void> shareToFeedInstagram({
+    String type = 'image/*',
+    @required String path,
+    OnSuccessHandler onSuccess,
+    OnCancelHandler onCancel,
+  }) async {
+    _channel.setMethodCallHandler((call) {
+      switch (call.method) {
+        case "onSuccess":
+          return onSuccess(call.arguments);
+        case "onCancel":
+          return onCancel();
+        default:
+          throw UnsupportedError("Unknown method called");
+      }
+    });
     return _channel.invokeMethod('shareToFeedInstagram', <String, dynamic>{
       'type': type,
       'path': path,
     });
   }
+
+  static Future<void> shareToFeedFacebook({
+    String caption,
+    @required String path,
+    OnSuccessHandler onSuccess,
+    OnCancelHandler onCancel,
+    OnErrorHandler onError,
+  }) async {
+    _channel.setMethodCallHandler((call) {
+      switch (call.method) {
+        case "onSuccess":
+          return onSuccess(call.arguments);
+        case "onCancel":
+          return onCancel();
+        case "onError":
+          return onError(call.arguments);
+        default:
+          throw UnsupportedError("Unknown method called");
+      }
+    });
+    return _channel.invokeMethod('shareToFeedFacebook', <String, dynamic>{
+      'caption': caption,
+      'path': path,
+    });
+  }
+
+  static Future<dynamic> shareToFeedFacebookLink({
+    String quote,
+    @required String url,
+    OnSuccessHandler onSuccess,
+    OnCancelHandler onCancel,
+    OnErrorHandler onError,
+  }) async {
+    _channel.setMethodCallHandler((call) {
+      switch (call.method) {
+        case "onSuccess":
+          return onSuccess(call.arguments);
+        case "onCancel":
+          return onCancel();
+        case "onError":
+          return onError(call.arguments);
+        default:
+          throw UnsupportedError("Unknown method called");
+      }
+    });
+    return _channel.invokeMethod('shareToFeedFacebookLink', <String, dynamic>{
+      'quote': quote,
+      'url': url,
+    });
+  }
+  
   
   static Future<void> shareToWhatsapp(String type, String path) async {
     return _channel.invokeMethod('shareToWhatsapp', <String, dynamic>{
