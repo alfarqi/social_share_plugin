@@ -24,6 +24,9 @@ class SocialSharePlugin {
     _channel.setMethodCallHandler((call) {
       switch (call.method) {
         case "onSuccess":
+          
+          
+          print('mehrbanni cum on u and i will do what u need');
           return onSuccess(call.arguments);
         case "onCancel":
           return onCancel();
