@@ -88,7 +88,24 @@ class SocialSharePlugin {
   }
   
   
-  
+  static Future<void> shareToWhatsapp(String type, String path) async {
+    _channel.setMethodCallHandler((call) {
+      switch (call.method) {
+        case "onSuccess":
+          return onSuccess(call.arguments);
+        case "onCancel":
+          return onCancel();
+        case "onError":
+          return onError(call.arguments);
+        default:
+          throw UnsupportedError("Unknown method called");
+      }
+    });
+    return _channel.invokeMethod('shareToWhatsapp', <String, dynamic>{
+      'type': type,
+      'path': path,
+    });
+  }
 
   static Future<void> shareTextToFeedInstagram(String txtMsg) async {
     return _channel.invokeMethod('shareTextToFeedInstagram', <String, dynamic>{
@@ -96,19 +113,6 @@ class SocialSharePlugin {
     });
   }
 
-  static Future<void> shareToFeedFacebook(String caption, String path) async {
-    return _channel.invokeMethod('shareToFeedFacebook', <String, dynamic>{
-      'caption': caption,
-      'path': path,
-    });
-  }
-
-  static Future<void> sharetoWhatsapp(String type, String path) async {
-    return _channel.invokeMethod('shareToWhatsapp', <String, dynamic>{
-      'type': type,
-      'path': path,
-    });
-  }
 
   static Future<void> shareTextToWhatsapp(String txtMsg) async {
     return _channel.invokeMethod('shareTextToWhatsapp', <String, dynamic>{
@@ -116,4 +120,5 @@ class SocialSharePlugin {
     });
   }
 
-  
+
+}
