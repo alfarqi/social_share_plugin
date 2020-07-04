@@ -21,6 +21,13 @@ class SocialSharePlugin {
       'path': path,
     });
   }
+  
+  static Future<void> shareToWhatsapp(String type, String path) async {
+    return _channel.invokeMethod('shareToWhatsapp', <String, dynamic>{
+      'type': type,
+      'path': path,
+    });
+  }
 
   static Future<void> shareTextToFeedInstagram(String txtMsg) async {
     return _channel.invokeMethod('shareTextToFeedInstagram', <String, dynamic>{
