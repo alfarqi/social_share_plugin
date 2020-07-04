@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:meta/meta.dart';
 import 'package:flutter/services.dart';
 
 typedef Future<dynamic> OnCancelHandler();
@@ -89,18 +89,18 @@ class SocialSharePlugin {
   
   
   static Future<void> shareToWhatsapp(String type, String path) async {
-    _channel.setMethodCallHandler((call) {
-      switch (call.method) {
-        case "onSuccess":
-          return onSuccess(call.arguments);
-        case "onCancel":
-          return onCancel();
-        case "onError":
-          return onError(call.arguments);
-        default:
-          throw UnsupportedError("Unknown method called");
-      }
-    });
+    // _channel.setMethodCallHandler((call) {
+    //   switch (call.method) {
+    //     case "onSuccess":
+    //       return onSuccess(call.arguments);
+    //     case "onCancel":
+    //       return onCancel();
+    //     case "onError":
+    //       return onError(call.arguments);
+    //     default:
+    //       throw UnsupportedError("Unknown method called");
+    //   }
+    // });
     return _channel.invokeMethod('shareToWhatsapp', <String, dynamic>{
       'type': type,
       'path': path,
